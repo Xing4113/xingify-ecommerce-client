@@ -1,0 +1,15 @@
+FROM node:20-alpine as builder
+
+WORKDIR /app
+
+# Copy everything including node_modules
+COPY . .
+
+# Skip npm install, as node_modules is already built
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

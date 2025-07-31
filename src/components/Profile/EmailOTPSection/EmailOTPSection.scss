@@ -1,0 +1,29 @@
+.form-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .verify-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+
+    &.verified {
+      color: #007500;
+    }
+
+    &.not-verified {
+      color: #c11000;
+    }
+  }
+
+  .save-btn {
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}

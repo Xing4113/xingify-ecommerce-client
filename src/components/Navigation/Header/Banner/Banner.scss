@@ -1,0 +1,44 @@
+.banner {
+  background: #38523e;
+  color: white;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  transition: transform 0.2s ease-in-out;
+
+  .banner-content {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+
+    .left,
+    .right {
+      width: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .center {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        font-size: 0.8rem;
+        margin: 0;
+        text-align: center;
+      }
+    }
+
+    .next-btn {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      color: white;
+    }
+  }
+}

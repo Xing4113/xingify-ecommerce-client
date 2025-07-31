@@ -1,0 +1,210 @@
+.order-card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(0.85rem, 2vw, 1.15rem);
+    padding-bottom: 16px;
+    margin-bottom: 1rem;
+
+    border-bottom: 1px solid #cecece;
+
+    .order-no {
+      font-weight: 500;
+    }
+
+    .status {
+      font-weight: 500;
+      text-transform: uppercase;
+
+      &.cancelled {
+        color: #c53030;
+      }
+      &.completed {
+        color: #2f855a;
+      }
+    }
+
+    .cancel-button {
+      align-self: flex-start;
+      background-color: #e53e3e;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #c53030;
+      }
+    }
+  }
+
+  .order-products {
+    border-bottom: 1px solid #cecece;
+
+    .order-product {
+      display: flex;
+      margin-bottom: 1.25rem;
+
+      .product-image {
+        flex-shrink: 0;
+        img {
+          width: 120px;
+          height: 120px;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+      }
+
+      .product-details-container {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        padding: 0 16px;
+
+        .product-details {
+          align-self: flex-start;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          .product-name {
+            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 1.15rem);
+            margin-bottom: 0.25rem;
+          }
+
+          .product-variant {
+            color: #666;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            margin-bottom: 0.25rem;
+            text-transform: capitalize;
+          }
+
+          .product-quantity {
+            font-size: 0.9rem;
+          }
+        }
+
+        .product-price {
+          align-self: center;
+          font-weight: 500;
+          font-size: 1rem;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  .order-summary-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.25rem;
+
+    .summary-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-width: 250px;
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.95rem;
+        flex-wrap: nowrap;
+
+        .summary-label {
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: #8f8f8f;
+        }
+
+        .summary-value {
+          font-weight: 500;
+          color: #222;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  .order-button-container {
+    padding: 0 1.25rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+
+    .cancel-button {
+      border: 1px solid #c92929;
+      background-color: white;
+      color: #c92929;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    .order-receive-button {
+      border: 1px solid #266e4a;
+      background-color: white;
+      color: #266e4a;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .order-card {
+    padding: 0.8rem;
+
+    .order-products {
+      .order-product {
+        .product-details-container {
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          padding-right: 0;
+
+          .product-price {
+            text-wrap: nowrap;
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+
+    .order-summary-container {
+      padding: 1rem 0;
+      .summary-details {
+        width: 100%;
+        min-width: unset;
+      }
+    }
+
+    .order-button-container {
+      padding: 0;
+    }
+  }
+}

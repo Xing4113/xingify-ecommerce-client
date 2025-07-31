@@ -1,0 +1,16 @@
+.order-history-page {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  h3 {
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .order-history-page {
+    padding: 0.5rem;
+  }
+}

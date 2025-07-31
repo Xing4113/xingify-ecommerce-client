@@ -1,0 +1,167 @@
+$error-red: #c11000;
+
+.floating-input {
+  margin-bottom: 1rem;
+  position: relative;
+
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border 0.2s ease;
+
+    input {
+      flex: 1;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus + label,
+      &.has-value + label {
+        top: -10px;
+        font-size: 0.8rem;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        background: white;
+        cursor: not-allowed;
+      }
+    }
+
+    .pass-icons {
+      height: 20px;
+      width: 20px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: white;
+    padding: 0 4px;
+    color: #aaa;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &.focused .input-wrap {
+    border-color: black;
+  }
+
+  &.focused.error label {
+    color: black;
+  }
+
+  &.error .input-wrap {
+    border-color: $error-red !important;
+  }
+
+  &.error label {
+    color: $error-red !important;
+  }
+
+  &.error .error-msg {
+    color: $error-red;
+    font-size: 12px;
+    margin-left: 0.25rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  &.error .error-icon {
+    width: 16px;
+    height: 16px;
+    fill: $error-red;
+  }
+
+  &.disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+
+  .input-bottom-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    gap: 0.75rem;
+
+    .info-note {
+      font-size: 12px;
+      padding-left: 12px;
+      color: rgb(194, 194, 194);
+    }
+
+    .send-otp-btn {
+      background: none;
+      border: none;
+      margin-right: 10px;
+      margin-left: auto;
+      color: #8d8d8d;
+      cursor: pointer;
+
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .send-otp-btn:hover {
+      color: black;
+    }
+
+    .disable-send-btn {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .disable-send-btn:hover {
+      color: #8d8d8d;
+    }
+
+    .password-requirements {
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+
+      ul {
+        li {
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.25rem;
+
+          &.valid {
+            color: rgb(0, 117, 0);
+            fill: rgb(0, 117, 0);
+          }
+
+          &.invalid {
+            color: $error-red;
+            fill: $error-red !important;
+          }
+
+          .password-status-icon {
+            flex-shrink: 0;
+            align-self: flex-start;
+
+            padding-right: 0.25rem;
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+}

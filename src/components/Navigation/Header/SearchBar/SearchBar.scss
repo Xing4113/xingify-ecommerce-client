@@ -1,0 +1,49 @@
+.search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: transparent;
+
+  .search-btn {
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+    transition: 0.3s ease;
+
+    cursor: pointer;
+
+    .search-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .search-input {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+    margin-left: 0;
+    background: transparent;
+  }
+
+  &.active {
+    .search-input {
+      width: 150px;
+      opacity: 1;
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #ccc;
+      background: white;
+      margin-left: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@import "./variables";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  max-width: 1920px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  font-family: $font-family;
+}
+
+.d-none {
+  display: none;
+}
+
+.mt-space {
+  margin-top: 56px;
+}
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main {
+    flex: 1;
+  }
+}

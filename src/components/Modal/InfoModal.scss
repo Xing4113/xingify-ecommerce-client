@@ -1,0 +1,147 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  animation: fadeIn 0.3s ease;
+}
+
+.info-modal {
+  background: #fafafa;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 320px;
+  max-width: 90vw;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: slideDown 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .modal-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  .icon {
+    font-size: 6rem;
+    margin-bottom: 0.25rem;
+
+    &.success {
+      color: #22a85a;
+    }
+    &.error {
+      color: #cb221c;
+    }
+    &.warning {
+      color: #5d5d5d;
+    }
+    &.loading {
+      color: white;
+    }
+
+    &.spin {
+      animation: spin 1.5s linear infinite;
+    }
+  }
+
+  &.info-modal.loading-style {
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+
+    .icon.loading {
+      font-size: 3rem;
+    }
+
+    .modal-close-btn,
+    .close-btn {
+      display: none;
+    }
+  }
+
+  .warning-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    button {
+      padding: 0.5rem 1.2rem;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+
+      &.confirm-btn {
+        background-color: #f59e0b;
+        color: white;
+
+        &:hover {
+          background-color: #d97706;
+        }
+      }
+
+      &.cancel-btn {
+        background-color: #e5e7eb;
+        color: #333;
+
+        &:hover {
+          background-color: #d1d5db;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,204 @@
+@use "../variables";
+
+#root {
+  height: 100%;
+}
+
+.auth-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .auth-card {
+    padding: 1.75rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.159);
+    max-width: 400px;
+    width: 100%;
+
+    h1 {
+      text-align: center;
+
+      .logo-img {
+        max-height: 60px;
+        max-width: 200px;
+      }
+    }
+
+    .auth-intro {
+      margin-bottom: 1.25rem;
+
+      h2 {
+        text-align: left;
+        margin-bottom: 0.25rem;
+      }
+
+      p {
+        color: #8a8a8a;
+      }
+
+      .confirm-email-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+
+        .show-email {
+          font-weight: bold;
+          text-decoration: underline;
+          word-break: break-word;
+        }
+
+        .edit-email-text {
+          align-self: flex-end;
+          color: variables.$primary;
+          opacity: 0.7;
+          font-size: 14px;
+          outline: none;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .auth-form {
+      .auth-error {
+        color: #c11000;
+      }
+
+      .auth-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background: variables.$primary;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      .auth-btn-disabled {
+        cursor: normal;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      .auth-options {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .link-btn {
+          font-size: 0.95rem;
+          background: none;
+          border: none;
+          padding: 0;
+          margin-top: 0.5rem;
+          color: variables.$primary;
+          text-decoration: none;
+          cursor: pointer;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: variables.$primary;
+            opacity: 0.8;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 437px) {
+  .auth-container .auth-card {
+    box-shadow: none;
+  }
+}
+
+// login page
+.login-container {
+  .login-card {
+    .social-login {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+
+      .social-btn {
+        color: variables.$primary;
+        background-color: variables.$white;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        font-weight: bold;
+
+        padding: 0.5rem 1.5rem;
+        border: 1px solid #797979;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s ease;
+
+        .social-icon {
+          width: 28px;
+          height: 28px;
+          transition: fill 0.3s ease;
+          margin-right: 0.75rem;
+        }
+      }
+
+      .google-btn:hover {
+        background-color: #d83a2c;
+        color: variables.$white;
+
+        .social-icon {
+          fill: variables.$white;
+        }
+      }
+
+      .facebook-btn:hover {
+        background-color: #0457dd;
+        color: variables.$white;
+
+        .social-icon {
+          fill: variables.$white;
+        }
+      }
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1rem 0;
+      color: #999;
+      font-size: 0.9rem;
+
+      &::before,
+      &::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ccc;
+      }
+
+      &::before {
+        margin-right: 1.25em;
+      }
+
+      &::after {
+        margin-left: 1.25em;
+      }
+    }
+  }
+}

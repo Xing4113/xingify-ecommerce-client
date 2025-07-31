@@ -1,0 +1,6 @@
+# .dockerignore
+# Comment out node_modules during this build workaround
+# node_modules/
+build/
+dist/
+*.log

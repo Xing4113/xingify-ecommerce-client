@@ -1,0 +1,36 @@
+.delivery_option_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .delivery-option {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border 0.3s ease, background-color 0.3s ease;
+
+    .option-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .option-subtext {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 0.25rem;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &:hover {
+      background-color: #f9f9f9;
+    }
+
+    &.selected {
+      border-color: #007bff;
+      background-color: #e9f2ff;
+    }
+  }
+}

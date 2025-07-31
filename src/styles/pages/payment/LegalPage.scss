@@ -1,0 +1,41 @@
+.legal-page {
+  max-width: 720px;
+  margin: 4rem auto 6rem;
+  padding: 0 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #222;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+
+    li {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+      list-style-type: disc;
+    }
+  }
+
+  a {
+    color: #0056b3;
+    text-decoration: underline;
+
+    &:hover {
+      color: #004099;
+    }
+  }
+}
