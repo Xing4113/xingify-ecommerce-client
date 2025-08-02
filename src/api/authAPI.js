@@ -1,5 +1,7 @@
 import api from "./axiosInstance";
 
+export const fetchJwtToken = () => api.get("/auth/getJwtToken");
+
 export const sendOtp = (email) => {
   return api.post("/auth/send-otp", { email });
 };

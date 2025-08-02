@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import FormInput from "../../FormInput/FormInput";
 import { sendOtp } from "../../../api/authAPI";
-import axios from "axios";
+import { updateEmail } from "../../../api/userAPI";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import "./EmailOTPSection.scss";
 import { useModal } from "../../../context/ModalContext";
@@ -86,15 +86,7 @@ const EmailOTPSection = ({ currentEmail, isEmailVerified, getUser }) => {
     setIsSubmitting(true);
 
     try {
-      await axios.patch(
-        "http://localhost:5000/user/updateEmail",
-        {
-          email: formData.email,
-          otpCode: formData.otpCode,
-        },
-        { withCredentials: true }
-      );
-
+      await updateEmail(formData);
       showModal("success", "Your email has been verified successfully.");
 
       await getUser();

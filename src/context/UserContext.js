@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { fetchJwtToken, fetchUserProfile, logoutUser } from "../api/userAPI";
+import { fetchUserProfile, logoutUser } from "../api/userAPI";
+import { fetchJwtToken } from "../api/authAPI";
 
 const UserContext = createContext();
 
@@ -39,8 +40,10 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await logoutUser();
 
+      console.log("res =", res);
+
       if (res.status === 200) {
-        window.location.href = "/";
+        // window.location.href = "/";
       }
     } catch (err) {
       console.error("Logout failed:", err);
@@ -48,7 +51,7 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchUserProfile();
+    getUser();
   }, []);
 
   return (

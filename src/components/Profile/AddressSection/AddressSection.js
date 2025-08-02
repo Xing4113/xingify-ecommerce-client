@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import FormInput from "../../FormInput/FormInput";
-import axios from "axios";
+import { updateAddress } from "../../../api/userAPI";
+import { searchAddress } from "../../../api/externalAPI";
 import "./AddressSection.scss";
 import { useModal } from "../../../context/ModalContext";
 
@@ -56,13 +57,7 @@ const AddressSection = ({
       }
 
       try {
-        const url = `https://www.onemap.gov.sg/api/common/elastic/search?searchVal=${value.trim()}&returnGeom=Y&getAddrDetails=Y&pageNum=1`;
-
-        const res = await fetch(url, {
-          method: "GET",
-        });
-
-        const data = await res.json();
+        const data = await searchAddress(value.trim());
 
         if (data.found > 0 && data.results[0]?.POSTAL === value.trim()) {
           const result = data.results[0];
@@ -89,6 +84,8 @@ const AddressSection = ({
             ...prev,
             postal_code: "Invalid postal code",
           }));
+
+          setShowValidation(true);
         }
       } catch (err) {
         setErrors((prev) => ({
@@ -125,17 +122,7 @@ const AddressSection = ({
     setIsSubmitting(true);
 
     try {
-      await axios.patch(
-        "http://localhost:5000/user/updateAddress",
-        {
-          street_address: formData.street_address,
-          unit_number: formData.unit_number,
-          postal_code: formData.postal_code,
-          city: formData.city,
-        },
-        { withCredentials: true }
-      );
-
+      await updateAddress(formData);
       await getUser();
       showModal("success", "Address updated successfully.");
     } catch (err) {

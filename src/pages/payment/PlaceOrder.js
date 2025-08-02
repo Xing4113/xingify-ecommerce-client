@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { updateAddress } from "../../api/userAPI";
 import * as yup from "yup";
 import { useCart } from "../../context/CartContext";
 import { useUser } from "../../context/UserContext";
@@ -96,13 +97,7 @@ function PlaceOrder() {
       }
 
       try {
-        const url = `https://www.onemap.gov.sg/api/common/elastic/search?searchVal=${value.trim()}&returnGeom=Y&getAddrDetails=Y&pageNum=1`;
-
-        const res = await fetch(url, {
-          method: "GET",
-        });
-
-        const data = await res.json();
+        const data = await updateAddress(value.trim());
 
         if (data.found > 0 && data.results[0]?.POSTAL === value.trim()) {
           const result = data.results[0];

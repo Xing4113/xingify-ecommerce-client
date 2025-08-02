@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import FormInput from "../../FormInput/FormInput";
-import axios from "axios";
+import { updatePassword } from "../../../api/userAPI";
 import "./PasswordSection.scss";
 import { useModal } from "../../../context/ModalContext";
 
@@ -74,15 +74,7 @@ const PasswordSection = ({ has_password, getUser }) => {
     setIsSubmitting(true);
 
     try {
-      await axios.patch(
-        "http://localhost:5000/user/updatePassword",
-        {
-          current_password: formData.current_password,
-          new_password: formData.new_password,
-        },
-        { withCredentials: true }
-      );
-
+      await updatePassword(formData);
       await getUser();
       showModal("success", "Password saved.");
 

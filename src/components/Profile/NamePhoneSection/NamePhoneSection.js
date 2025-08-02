@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as yup from "yup";
-import axios from "axios";
+import { updateNamePhone } from "../../../api/userAPI";
 import FormInput from "../../FormInput/FormInput";
 import "./NamePhoneSection.scss";
 import { useModal } from "../../../context/ModalContext";
@@ -63,15 +63,7 @@ const NamePhoneSection = ({ name, phone_number, getUser }) => {
     setIsSubmitting(true);
 
     try {
-      await axios.patch(
-        "http://localhost:5000/user/updateNamePhone",
-        {
-          name: formData.name,
-          phone_number: formData.phone_number,
-        },
-        { withCredentials: true }
-      );
-
+      await updateNamePhone(formData);
       await getUser();
       showModal("success", "Updated successfully.");
     } catch (err) {
