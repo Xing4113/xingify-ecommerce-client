@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import {
+  fetchOrderHistory,
+  cancelUserOrder,
+  confirmOrderReceived,
+} from "../api/orderAPI";
 import { useUser } from "../context/UserContext";
 import "../styles/pages/OrderHistory.scss";
 import OrderCard from "../components/ViewOrder/OrderCard/OrderCard";
@@ -14,10 +18,7 @@ function OrderHistory() {
     const fetchOrders = async () => {
       showModal("loading");
       try {
-        const res = await axios.get(
-          "http://localhost:5000/order/orderHistory",
-          { withCredentials: true }
-        );
+        const res = await fetchOrderHistory();
         setOrders(res.data.orders || []);
       } catch (err) {
         console.error("Failed to fetch orders:", err);
@@ -35,14 +36,8 @@ function OrderHistory() {
     showModal("warning", "Are you sure you want to cancel Order?", async () => {
       showModal("loading");
       try {
-        const res = await axios.patch(
-          "http://localhost:5000/order/cancelUserOrder",
-          {
-            order_id,
-            order_no,
-          },
-          { withCredentials: true }
-        );
+        const res = await cancelUserOrder({ order_id, order_no });
+
         if (res.data.success) {
           setOrders((prev) =>
             prev.map((o) =>
@@ -63,14 +58,7 @@ function OrderHistory() {
     showModal("loading");
 
     try {
-      const res = await axios.patch(
-        "http://localhost:5000/order/confirmOrderReceived",
-        {
-          order_id,
-          order_no,
-        },
-        { withCredentials: true }
-      );
+      const res = await confirmOrderReceived({ order_id, order_no });
 
       if (res.data.success) {
         setOrders((prev) =>
