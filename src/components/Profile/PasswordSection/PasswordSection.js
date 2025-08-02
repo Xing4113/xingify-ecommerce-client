@@ -5,7 +5,7 @@ import axios from "axios";
 import "./PasswordSection.scss";
 import { useModal } from "../../../context/ModalContext";
 
-const PasswordSection = ({ has_password, fetchUserProfile }) => {
+const PasswordSection = ({ has_password, getUser }) => {
   const schema = yup.object().shape({
     ...(has_password && {
       current_password: yup.string().required("Current password is required"),
@@ -83,7 +83,7 @@ const PasswordSection = ({ has_password, fetchUserProfile }) => {
         { withCredentials: true }
       );
 
-      await fetchUserProfile();
+      await getUser();
       showModal("success", "Password saved.");
 
       setFormData({ current_password: "", new_password: "" });

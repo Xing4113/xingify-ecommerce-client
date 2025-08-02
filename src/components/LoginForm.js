@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "./FormInput/FormInput";
-import { login } from "../api/auth";
+import { login } from "../api/authAPI";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const LoginForm = () => {
     try {
       const res = await login(email);
 
-      if (res.emailFound) {
+      if (res.data.emailFound) {
         navigate("/verifyAccount", { state: { email } });
       } else {
         navigate("/signup", { state: { email } });

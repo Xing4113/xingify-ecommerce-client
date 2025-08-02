@@ -14,7 +14,7 @@ const schema = yup.object().shape({
     .matches(/^[689]\d{7}$/, "Please enter a valid phone number"),
 });
 
-const NamePhoneSection = ({ name, phone_number, fetchUserProfile }) => {
+const NamePhoneSection = ({ name, phone_number, getUser }) => {
   const [formData, setFormData] = useState({
     name: name || "",
     phone_number: phone_number || "",
@@ -72,7 +72,7 @@ const NamePhoneSection = ({ name, phone_number, fetchUserProfile }) => {
         { withCredentials: true }
       );
 
-      await fetchUserProfile();
+      await getUser();
       showModal("success", "Updated successfully.");
     } catch (err) {
       console.error("Failed to update name/phone:", err);

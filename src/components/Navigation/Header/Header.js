@@ -8,7 +8,7 @@ import { BsMinecart } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useCart } from "../../../context/CartContext";
 
-function Header({ user, logoutUser, onMenuToggle }) {
+function Header({ user, logout, onMenuToggle }) {
   const { cartCount } = useCart();
 
   const [showHeader, setShowHeader] = useState(true);
@@ -98,7 +98,7 @@ function Header({ user, logoutUser, onMenuToggle }) {
 
                     <Link to="/profile">Profile</Link>
                     <Link to="/orders">View Orders</Link>
-                    <button className="logout-btn" onClick={logoutUser}>
+                    <button className="logout-btn" onClick={logout}>
                       Logout
                     </button>
                   </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FormInput from "./FormInput/FormInput";
-import { loginWithPassword } from "../api/auth";
+import { loginWithPassword } from "../api/authAPI";
 
 const PasswordLoginForm = ({ email, onSwitchMethod }) => {
   const [password, setPassword] = useState("");
@@ -11,7 +11,7 @@ const PasswordLoginForm = ({ email, onSwitchMethod }) => {
     try {
       const res = await loginWithPassword(email, password);
 
-      if (res.user_id) {
+      if (res.data.user_id) {
         window.location.href = "/";
       } else {
         setErrMsg(res.data?.message || "Login failed.");

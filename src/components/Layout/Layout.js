@@ -7,7 +7,7 @@ import { useUser } from "../../context/UserContext";
 import useIsMobileView from "../../hook/useIsMobileView";
 
 const Layout = ({ children }) => {
-  const { user, logoutUser } = useUser();
+  const { user, logout } = useUser();
   const isMobileView = useIsMobileView();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -31,14 +31,14 @@ const Layout = ({ children }) => {
       <Header
         onMenuToggle={() => setIsMobileMenuOpen(true)}
         user={user}
-        logoutUser={logoutUser}
+        logout={logout}
       />
 
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         user={user}
-        logoutUser={logoutUser}
+        logout={logout}
       />
 
       <main>{children}</main>

@@ -7,7 +7,7 @@ import "../styles/pages/Profile.scss";
 import { useUser } from "../context/UserContext";
 
 const Profile = () => {
-  const { user, fetchUserProfile } = useUser();
+  const { user, getUser } = useUser();
 
   if (!user) return null;
 
@@ -18,24 +18,21 @@ const Profile = () => {
       <EmailOTPSection
         currentEmail={user.email}
         isEmailVerified={user.is_email_verify}
-        fetchUserProfile={fetchUserProfile}
+        getUser={getUser}
       />
       <NamePhoneSection
         name={user.name}
         phone_number={user.phone_number}
-        fetchUserProfile={fetchUserProfile}
+        getUser={getUser}
       />
       <AddressSection
         street_address={user.street_address}
         unit_number={user.unit_number}
         postal_code={user.postal_code}
         city={user.city}
-        fetchUserProfile={fetchUserProfile}
+        getUser={getUser}
       />
-      <PasswordSection
-        has_password={user.has_password}
-        fetchUserProfile={fetchUserProfile}
-      />
+      <PasswordSection has_password={user.has_password} getUser={getUser} />
     </div>
   );
 };

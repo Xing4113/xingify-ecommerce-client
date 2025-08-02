@@ -19,7 +19,7 @@ const AddressSection = ({
   unit_number,
   postal_code,
   city,
-  fetchUserProfile,
+  getUser,
 }) => {
   const [formData, setFormData] = useState({
     street_address: street_address || "",
@@ -136,7 +136,7 @@ const AddressSection = ({
         { withCredentials: true }
       );
 
-      await fetchUserProfile();
+      await getUser();
       showModal("success", "Address updated successfully.");
     } catch (err) {
       console.error("Update Address ", err);

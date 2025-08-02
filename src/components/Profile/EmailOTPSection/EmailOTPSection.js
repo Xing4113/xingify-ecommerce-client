@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import FormInput from "../../FormInput/FormInput";
-import { sendOtp } from "../../../api/auth";
+import { sendOtp } from "../../../api/authAPI";
 import axios from "axios";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import "./EmailOTPSection.scss";
@@ -15,11 +15,7 @@ const schema = yup.object().shape({
   otpCode: yup.string().required("OTP code is required"),
 });
 
-const EmailOTPSection = ({
-  currentEmail,
-  isEmailVerified,
-  fetchUserProfile,
-}) => {
+const EmailOTPSection = ({ currentEmail, isEmailVerified, getUser }) => {
   const [formData, setFormData] = useState({
     email: currentEmail || "",
     otpCode: "",
@@ -101,7 +97,7 @@ const EmailOTPSection = ({
 
       showModal("success", "Your email has been verified successfully.");
 
-      await fetchUserProfile();
+      await getUser();
 
       setFormData((prev) => ({ ...prev, otpCode: "" }));
     } catch (err) {

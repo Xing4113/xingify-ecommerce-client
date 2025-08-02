@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FormInput from "./FormInput/FormInput";
 import { formatTimer } from "../utils/time";
-import { sendOtp, verifyOtp } from "../api/auth";
+import { sendOtp, verifyOtp } from "../api/authAPI";
 import { useModal } from "../context/ModalContext";
 
 const OtpLoginForm = ({
@@ -58,7 +58,7 @@ const OtpLoginForm = ({
     try {
       const res = await verifyOtp(email, otpEntered);
 
-      if (res.user_id) {
+      if (res.data.user_id) {
         window.location.href = "/";
       }
     } catch (err) {

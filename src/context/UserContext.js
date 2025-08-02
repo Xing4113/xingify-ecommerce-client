@@ -1,51 +1,43 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import { fetchJwtToken, fetchUserProfile, logoutUser } from "../api/userAPI";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const getJwtToken = async () => {
+  const checkJwtToken = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/auth/getJwtToken", {
-        withCredentials: true,
-      });
+      const res = await fetchJwtToken();
 
       return res.data.jwtToken === true;
     } catch (err) {
-      console.error("getLoginStatus unexpected error:", err);
+      console.error("checkJwtToken unexpected error:", err);
     }
   };
 
-  const fetchUserProfile = async () => {
+  const getUser = async () => {
     try {
-      const jwtToken = await getJwtToken();
+      const jwtToken = await checkJwtToken();
       if (!jwtToken) return;
 
-      const res = await axios.get("http://localhost:5000/user/profile", {
-        withCredentials: true,
-      });
+      const res = await fetchUserProfile();
 
       setUser(res.data.userInfo);
     } catch (err) {
       const status = err?.response?.status;
 
       if (status !== 401 && status !== 403) {
-        console.error("fetchUserProfile unexpected error:", err);
+        console.error("getUser unexpected error:", err);
       }
 
       setUser(null);
     }
   };
 
-  const logoutUser = async () => {
+  const logout = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:5000/user/logoutUser",
-        {},
-        { withCredentials: true }
-      );
+      const res = await logoutUser();
 
       if (res.status === 200) {
         window.location.href = "/";
@@ -60,9 +52,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider
-      value={{ user, setUser, fetchUserProfile, logoutUser }}
-    >
+    <UserContext.Provider value={{ user, setUser, getUser, logout }}>
       {children}
     </UserContext.Provider>
   );

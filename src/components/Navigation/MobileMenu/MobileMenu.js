@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 
-function MobileMenu({ isOpen, onClose, user, logoutUser }) {
+function MobileMenu({ isOpen, onClose, user, logout }) {
   return (
     <div
       className={`mobile-menu-overlay ${isOpen ? "visible" : ""}`}
@@ -65,7 +65,7 @@ function MobileMenu({ isOpen, onClose, user, logoutUser }) {
                 <NavLink to="/orders" onClick={onClose}>
                   View Orders
                 </NavLink>
-                <button className="logout-btn" onClick={logoutUser}>
+                <button className="logout-btn" onClick={logout}>
                   Logout
                 </button>
               </div>

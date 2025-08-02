@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import FormInput from "./FormInput/FormInput";
-import { sendOtp, signUp } from "../api/auth";
+import { sendOtp, signUp } from "../api/authAPI";
 import { useModal } from "../context/ModalContext";
 
 // Define Yup validation schema
@@ -102,7 +102,7 @@ const SignUpForm = ({ email }) => {
     try {
       const res = await signUp(formData);
 
-      if (res.user_id) {
+      if (res.data.user_id) {
         window.location.href = "/";
       }
     } catch (err) {
