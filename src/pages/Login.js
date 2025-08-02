@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 
 function Login() {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   return (
     <div className="auth-container login-container">
       <div className="auth-card login-card">
@@ -23,14 +25,14 @@ function Login() {
         <div className="social-login">
           <a
             className="social-btn google-btn"
-            href="http://localhost:5000/auth/google"
+            href={`${API_BASE_URL}auth/google`}
           >
             <GoogleIcon className="social-icon" />
             Continue with Google
           </a>
           <a
             className="social-btn facebook-btn"
-            href="http://localhost:5000/auth/facebook"
+            href={`${API_BASE_URL}auth/facebook`}
           >
             <FacebookIcon className="social-icon" />
             Continue with Facebook

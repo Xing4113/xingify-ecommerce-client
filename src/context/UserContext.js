@@ -43,7 +43,7 @@ export const UserProvider = ({ children }) => {
       console.log("res =", res);
 
       if (res.status === 200) {
-        // window.location.href = "/";
+        window.location.href = "/";
       }
     } catch (err) {
       console.error("Logout failed:", err);
