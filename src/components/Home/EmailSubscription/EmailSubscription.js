@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./EmailSubscription.scss";
-import axios from "axios";
+import { addEmailSubscription } from "../../../api/emailSubscription";
 import { useModal } from "../../../context/ModalContext";
 
 const EmailSubscription = () => {
@@ -28,10 +28,7 @@ const EmailSubscription = () => {
     showModal("loading");
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/email/addEmailSubscription",
-        { email }
-      );
+      const res = await addEmailSubscription(email);
 
       showModal("success", res.data.message || "Subscribed successfully.");
       setEmail("");
