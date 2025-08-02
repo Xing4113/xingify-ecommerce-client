@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { prepareOrder } from "../../api/orderAPI";
 import { updateAddress } from "../../api/userAPI";
 import * as yup from "yup";
 import { useCart } from "../../context/CartContext";
@@ -175,24 +175,20 @@ function PlaceOrder() {
     showModal("loading");
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/order/prepare",
-        {
-          name: formData.name,
-          email: formData.email,
-          phoneNumber: formData.phoneNumber,
-          streetAddress: formData.streetAddress,
-          unitNumber: formData.unitNumber,
-          postalCode: formData.postalCode,
-          city: formData.city,
-          deliveryType: deliveryOption,
-          deliveryFee: deliveryCharge,
-          totalAmount: finalTotal,
-          expectedDate: getExpectedArrivalDate(deliveryOption),
-          items: cartItems,
-        },
-        { withCredentials: true }
-      );
+      const response = await prepareOrder({
+        name: formData.name,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        streetAddress: formData.streetAddress,
+        unitNumber: formData.unitNumber,
+        postalCode: formData.postalCode,
+        city: formData.city,
+        deliveryType: deliveryOption,
+        deliveryFee: deliveryCharge,
+        totalAmount: finalTotal,
+        expectedDate: getExpectedArrivalDate(deliveryOption),
+        items: cartItems,
+      });
 
       const data = response.data;
 

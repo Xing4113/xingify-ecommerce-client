@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { getStripeSession, cancelOrderRequest } from "../../api/orderAPI";
 import "../../styles/pages/payment/PaymentCancel.scss";
 import { useModal } from "../../context/ModalContext";
 
@@ -17,19 +17,13 @@ const PaymentCancel = () => {
       showModal("loading");
 
       try {
-        const { data: session } = await axios.get(
-          `http://localhost:5000/stripe/session/${sessionId}`,
-          { withCredentials: true }
-        );
+        const { data: session } = await getStripeSession(sessionId);
 
         const metadata = session.metadata;
 
-        await axios.delete("http://localhost:5000/order/cancelOrder", {
-          data: {
-            order_id: metadata.order_id,
-            order_no: metadata.order_no,
-          },
-          withCredentials: true,
+        await cancelOrderRequest({
+          order_id: metadata.order_id,
+          order_no: metadata.order_no,
         });
       } catch (err) {
         console.error("Failed to cancel order:", err);
@@ -41,6 +35,7 @@ const PaymentCancel = () => {
 
     if (sessionId && !hasFetchedRef.current) {
       hasFetchedRef.current = true;
+      cancelOrder();
     }
   }, []);
 

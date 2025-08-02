@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { getStripeSession, confirmOrder } from "../../api/orderAPI";
 import "../../styles/pages/payment/PaymentSuccess.scss";
 import { useModal } from "../../context/ModalContext";
 
@@ -16,23 +16,19 @@ const PaymentSuccess = () => {
 
     const processOrder = async () => {
       showModal("loading");
+
       try {
-        const { data: session } = await axios.get(
-          `http://localhost:5000/stripe/session/${sessionId}`,
-          { withCredentials: true }
-        );
+        const { data: session } = await getStripeSession(sessionId);
 
         const metadata = session.metadata;
         setOrderNo(metadata.order_no);
 
-        await axios.put(
-          "http://localhost:5000/order/confirmOrder",
-          {
-            order_id: metadata.order_id,
-            order_no: metadata.order_no,
-          },
-          { withCredentials: true }
-        );
+        await confirmOrder({
+          order_id: metadata.order_id,
+          order_no: metadata.order_no,
+        });
+
+        // Optionally redirect or show success
       } catch (err) {
         console.error("Failed to process order:", err);
         window.location.href = "/cart";
