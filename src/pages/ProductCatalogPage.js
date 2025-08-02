@@ -2,7 +2,7 @@
 import "../styles/pages/ProductCatalog.scss";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { fetchFilteredProducts, getProductById } from "../api/productsAPI";
 import SideFilterDesktop from "../components/ProductCatalog/SideFilterDesktop/SideFilterDesktop";
 import SideFilterMobile from "../components/ProductCatalog/SideFilterMobile/SideFilterMobile";
 import ProductCard from "../components/ProductCatalog/ProductCard/ProductCard";
@@ -173,9 +173,8 @@ function ProductCatalog() {
           params.sortOrder = searchParams.get("sortOrder");
         }
 
-        const res = await axios.get("http://localhost:5000/product", {
-          params,
-        });
+        const res = await fetchFilteredProducts(params);
+
         setProducts(res.data);
       } catch (err) {
         console.log("API Error: ", err);
@@ -216,7 +215,7 @@ function ProductCatalog() {
   const handleProductClick = async (productId) => {
     try {
       showModal("loading");
-      const res = await axios.get(`http://localhost:5000/product/${productId}`);
+      const res = await getProductById(productId);
       setSelectedProduct(res.data);
       hideModal();
     } catch (err) {
