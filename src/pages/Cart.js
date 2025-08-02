@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import {
+  increaseCartItem,
+  decreaseCartItem,
+  deleteCartItem,
+} from "../api/cartAPI";
 import "../styles/pages/Cart.scss";
 import { FiPlusCircle } from "react-icons/fi";
 import { FiMinusCircle } from "react-icons/fi";
@@ -29,11 +33,7 @@ const Cart = () => {
 
   const handleIncrease = async (itemId) => {
     try {
-      await axios.patch(
-        `http://localhost:5000/cart/${itemId}/increase`,
-        {},
-        { withCredentials: true }
-      );
+      await increaseCartItem(itemId);
       refreshCart();
     } catch (err) {
       console.error("Failed to increase quantity", err);
@@ -42,11 +42,7 @@ const Cart = () => {
 
   const handleDecrease = async (itemId) => {
     try {
-      await axios.patch(
-        `http://localhost:5000/cart/${itemId}/decrease`,
-        {},
-        { withCredentials: true }
-      );
+      await decreaseCartItem(itemId);
       refreshCart();
     } catch (err) {
       console.error("Failed to decrease quantity", err);
@@ -57,9 +53,7 @@ const Cart = () => {
     showModal("warning", "Are you sure to remove this item?", async () => {
       showModal("loading");
       try {
-        await axios.delete(`http://localhost:5000/cart/${itemId}`, {
-          withCredentials: true,
-        });
+        await deleteCartItem(itemId);
         refreshCart();
         showModal("success", "Item removed successfully.");
       } catch (err) {

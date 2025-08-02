@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { fetchCartCount, fetchCartItems } from "../api/cartAPI";
 
 export const CartContext = createContext();
 
@@ -8,11 +9,8 @@ export const CartProvider = ({ children }) => {
 
   const updateCartCount = async () => {
     try {
-      const res = await fetch("http://localhost:5000/cart/countCart", {
-        credentials: "include",
-      });
-      const data = await res.json();
-      setCartCount(data.count || 0);
+      const res = await fetchCartCount();
+      setCartCount(res.data.count || 0);
     } catch (err) {
       console.error("Failed to fetch cart count", err);
     }
@@ -20,11 +18,8 @@ export const CartProvider = ({ children }) => {
 
   const updateCartItems = async () => {
     try {
-      const res = await fetch("http://localhost:5000/cart", {
-        credentials: "include",
-      });
-      const data = await res.json();
-      setCartItems(data.cart || []);
+      const res = await fetchCartItems();
+      setCartItems(res.data.cart || []);
     } catch (err) {
       console.error("Failed to fetch cart items", err);
     }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getAvailableSizes, updateCartItemSize } from "../../../api/cartAPI";
 import "./SizeModal.scss";
 import { IoMdClose } from "react-icons/io";
 
@@ -11,37 +11,32 @@ const SizeModal = ({ isOpen, itemId, onClose, updateCart }) => {
   useEffect(() => {
     if (!isOpen || !itemId) return;
 
-    setLoading(true);
-    axios
-      .get(`http://localhost:5000/cart/getInfo/${itemId}`, {
-        params: { itemId },
-        withCredentials: true,
-      })
-      .then((res) => {
+    const fetchSizes = async () => {
+      setLoading(true);
+      try {
+        const res = await getAvailableSizes(itemId);
+
         setAllSizes(res.data.sizes?.allSize || []);
         setAvailableSizes(
           res.data.sizes?.availableSize.map((s) => s.size) || []
         );
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Failed to fetch sizes", err);
         setAllSizes([]);
         setAvailableSizes([]);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchSizes();
   }, [isOpen, itemId]);
 
   const handleSizeSelect = async (newSize) => {
     try {
-      await axios.patch(
-        `http://localhost:5000/cart/updateSize/${itemId}`,
-        { size: newSize },
-        { withCredentials: true }
-      );
+      await updateCartItemSize(itemId, newSize);
       onClose();
-      updateCart(); // optional chaining
+      updateCart();
     } catch (err) {
       console.error("Failed to update size", err);
     }

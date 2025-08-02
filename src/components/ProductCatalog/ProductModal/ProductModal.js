@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import axios from "axios";
+import { addToCart } from "../../../api/cartAPI";
 import { useCart } from "../../../context/CartContext";
 import { useModal } from "../../../context/ModalContext";
 
@@ -30,18 +30,12 @@ const ProductModal = ({ product, onClose }) => {
   const handleAddToCart = async () => {
     showModal("loading");
     try {
-      const res = await axios.post(
-        "http://localhost:5000/cart/add",
-        {
-          productId: product.productId,
-          color: selectedColor,
-          size: selectedSize,
-          quantity: 1,
-        },
-        {
-          withCredentials: true, // important for sending the JWT cookie
-        }
-      );
+      const selectedVarianty = {
+        productId: product.productId,
+        color: selectedColor,
+        size: selectedSize,
+      };
+      const res = await addToCart(selectedVarianty);
 
       showModal("success", res.data.message); // "Item added to cart"
       updateCartCount();
