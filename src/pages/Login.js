@@ -30,13 +30,13 @@ function Login() {
             <GoogleIcon className="social-icon" />
             Continue with Google
           </a>
-          <a
+          {/* <a
             className="social-btn facebook-btn"
             href={`${API_BASE_URL}auth/facebook`}
           >
             <FacebookIcon className="social-icon" />
             Continue with Facebook
-          </a>
+          </a> */}
         </div>
 
         <div className="divider">
