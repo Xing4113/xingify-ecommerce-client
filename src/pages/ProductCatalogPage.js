@@ -54,7 +54,8 @@ function ProductCatalog() {
   const [isMobileFilterVisible, setIsMobileFilterVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const validCategories = ["men", "women", "kids", "new-arrival"];
-  const isInvalidCategory = !validCategories.includes(category);
+  const isInvalidCategory = !validCategories.includes(category?.toLowerCase());
+  const [loading, setLoading] = useState(false);
 
   // Reset filters when category changes
   useEffect(() => {
@@ -147,6 +148,7 @@ function ProductCatalog() {
 
     const fetchProducts = async () => {
       showModal("loading");
+      setLoading(true);
       try {
         const params = {
           category, // pass category explicitly
@@ -184,6 +186,7 @@ function ProductCatalog() {
       } catch (err) {
         console.log("API Error: ", err);
       } finally {
+        setLoading(false);
         hideModal();
       }
     };
@@ -331,14 +334,22 @@ function ProductCatalog() {
           }`}
         >
           <div className="product-grid">
-            {products.map((product) => (
-              <ProductCard
-                category={category}
-                key={product.productId}
-                product={product}
-                onClick={() => handleProductClick(product.productId)}
-              />
-            ))}
+            {loading ? (
+              <></> // Optionally remove this if you're already showing a modal
+            ) : products.length === 0 ? (
+              <div className="no-products-message">
+                <p>No products found.</p>
+              </div>
+            ) : (
+              products.map((product) => (
+                <ProductCard
+                  category={category}
+                  key={product.productId}
+                  product={product}
+                  onClick={() => handleProductClick(product.productId)}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

@@ -177,6 +177,14 @@
       gap: 1.5rem;
       align-items: stretch;
 
+      .no-products-message {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 2rem 1rem;
+        font-size: 1.2rem;
+        color: #666;
+      }
+
       @media (max-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
       }
