@@ -92,7 +92,9 @@ const AddressSection = ({
           ...prev,
           postal_code: "Failed to validate postal code",
         }));
-        console.error("validate address ", err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("validate address ", err);
+        }
       }
     }
   };
@@ -126,7 +128,9 @@ const AddressSection = ({
       await getUser();
       showModal("success", "Address updated successfully.");
     } catch (err) {
-      console.error("Update Address ", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Update Address ", err);
+      }
       showModal("error", "Failed to update. Please try again.");
     } finally {
       setIsSubmitting(false);

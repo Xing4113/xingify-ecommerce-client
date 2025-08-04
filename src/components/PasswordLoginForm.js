@@ -18,7 +18,9 @@ const PasswordLoginForm = ({ email, onSwitchMethod }) => {
       }
     } catch (err) {
       setErrMsg(err.response?.data?.message || "OTP verification failed.");
-      // console.error("handleLogin error:", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("handleLogin error:", err);
+      }
     }
   };
 

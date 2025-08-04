@@ -26,7 +26,9 @@ const PaymentCancel = () => {
           order_no: metadata.order_no,
         });
       } catch (err) {
-        console.error("Failed to cancel order:", err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Failed to cancel order:", err);
+        }
         window.location.href = "/cart";
       } finally {
         hideModal();

@@ -67,7 +67,9 @@ const NamePhoneSection = ({ name, phone_number, getUser }) => {
       await getUser();
       showModal("success", "Updated successfully.");
     } catch (err) {
-      console.error("Failed to update name/phone:", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Failed to update name/phone:", err);
+      }
       showModal("error", "Failed to update. Please try again.");
     } finally {
       setIsSubmitting(false);

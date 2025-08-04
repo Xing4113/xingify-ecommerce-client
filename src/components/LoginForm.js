@@ -28,7 +28,9 @@ const LoginForm = () => {
         navigate("/signup", { state: { email } });
       }
     } catch (err) {
-      // console.error("handleLogin: ", err);
+      if (process.env.NODE_ENV !== "production") {
+        // console.error("handleLogin: ", err);
+      }
       setErrMsg("An error occurred. Please try again.");
     }
   };

@@ -36,7 +36,9 @@ const Cart = () => {
       await increaseCartItem(itemId);
       refreshCart();
     } catch (err) {
-      console.error("Failed to increase quantity", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Failed to increase quantity", err);
+      }
     }
   };
 
@@ -45,7 +47,9 @@ const Cart = () => {
       await decreaseCartItem(itemId);
       refreshCart();
     } catch (err) {
-      console.error("Failed to decrease quantity", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Failed to decrease quantity", err);
+      }
     }
   };
 
@@ -57,7 +61,9 @@ const Cart = () => {
         refreshCart();
         showModal("success", "Item removed successfully.");
       } catch (err) {
-        console.error("Failed to delete cart item", err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Failed to delete cart item", err);
+        }
         showModal("error", "Failed to remove item.");
       }
     });

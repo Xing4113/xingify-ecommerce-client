@@ -80,7 +80,9 @@ const PasswordSection = ({ has_password, getUser }) => {
 
       setFormData({ current_password: "", new_password: "" });
     } catch (err) {
-      console.error("Update Password", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Update Password", err);
+      }
       showModal("error", "Try again later.");
     } finally {
       setIsSubmitting(false);

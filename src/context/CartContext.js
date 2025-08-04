@@ -12,7 +12,9 @@ export const CartProvider = ({ children }) => {
       const res = await fetchCartCount();
       setCartCount(res.data.count || 0);
     } catch (err) {
-      console.error("Failed to fetch cart count", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Failed to fetch cart count", err);
+      }
     }
   };
 
@@ -21,7 +23,9 @@ export const CartProvider = ({ children }) => {
       const res = await fetchCartItems();
       setCartItems(res.data.cart || []);
     } catch (err) {
-      console.error("Failed to fetch cart items", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Failed to fetch cart items", err);
+      }
     }
   };
 

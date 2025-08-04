@@ -220,7 +220,9 @@ function ProductCatalog() {
       hideModal();
     } catch (err) {
       showModal("error", "Please try again later.");
-      console.error("Failed to fetch product detail:", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Failed to fetch product detail:", err);
+      }
     }
   };
 

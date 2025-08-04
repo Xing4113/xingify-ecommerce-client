@@ -126,7 +126,9 @@ function PlaceOrder() {
           }));
         }
       } catch (error) {
-        console.error("OneMap API error:", error);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("OneMap API error:", error);
+        }
         setErrors((prev) => ({
           ...prev,
           postalCode: "Failed to validate postal code",
@@ -206,7 +208,9 @@ function PlaceOrder() {
         showModal("error", "Something went wrong. Please try again.");
       }
     } catch (err) {
-      console.error("Order creation or validation failed:", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Order creation or validation failed:", err);
+      }
       showModal("error", "Unable to place order. Please try again.");
     } finally {
       setIsSubmitting(false);

@@ -53,7 +53,9 @@ const SignUpForm = ({ email }) => {
       setOtpTimer(60); // 1 minutes countdown
       showModal("success", "OTP has been sent to your email.");
     } catch (err) {
-      console.error(err.response?.data?.message || "Failed to resend OTP.");
+      if (process.env.NODE_ENV !== "production") {
+        console.error(err.response?.data?.message || "Failed to resend OTP.");
+      }
       showModal("error", "Failed to send OTP. Please try again.");
     }
   };
@@ -106,7 +108,9 @@ const SignUpForm = ({ email }) => {
         window.location.href = "/";
       }
     } catch (err) {
-      console.error(err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error(err);
+      }
       setErrors((prev) => ({
         ...prev,
         ["otpCode"]: err.response?.data?.otpError,

@@ -21,7 +21,9 @@ const SizeModal = ({ isOpen, itemId, onClose, updateCart }) => {
           res.data.sizes?.availableSize.map((s) => s.size) || []
         );
       } catch (err) {
-        console.error("Failed to fetch sizes", err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Failed to fetch sizes", err);
+        }
         setAllSizes([]);
         setAvailableSizes([]);
       } finally {
@@ -38,7 +40,9 @@ const SizeModal = ({ isOpen, itemId, onClose, updateCart }) => {
       onClose();
       updateCart();
     } catch (err) {
-      console.error("Failed to update size", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Failed to update size", err);
+      }
     }
   };
 

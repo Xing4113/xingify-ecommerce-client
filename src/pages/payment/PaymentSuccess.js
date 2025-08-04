@@ -30,7 +30,9 @@ const PaymentSuccess = () => {
 
         // Optionally redirect or show success
       } catch (err) {
-        console.error("Failed to process order:", err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Failed to process order:", err);
+        }
         window.location.href = "/cart";
       } finally {
         hideModal();

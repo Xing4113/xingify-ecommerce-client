@@ -21,7 +21,9 @@ function OrderHistory() {
         const res = await fetchOrderHistory();
         setOrders(res.data.orders || []);
       } catch (err) {
-        console.error("Failed to fetch orders:", err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Failed to fetch orders:", err);
+        }
       } finally {
         hideModal();
       }
@@ -48,7 +50,9 @@ function OrderHistory() {
           showModal("success", "Order cancelled.");
         }
       } catch (err) {
-        console.error("Cancel failed:", err);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Cancel failed:", err);
+        }
         showModal("error", "Please try again later.");
       }
     });
@@ -70,7 +74,9 @@ function OrderHistory() {
         );
       }
     } catch (err) {
-      console.error("Failed to confirm order received:", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Failed to confirm order received:", err);
+      }
     } finally {
       hideModal();
     }

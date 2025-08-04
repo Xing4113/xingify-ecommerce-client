@@ -13,7 +13,9 @@ export const UserProvider = ({ children }) => {
 
       return res.data.jwtToken === true;
     } catch (err) {
-      console.error("checkJwtToken unexpected error:", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("checkJwtToken unexpected error:", err);
+      }
     }
   };
 
@@ -28,7 +30,7 @@ export const UserProvider = ({ children }) => {
     } catch (err) {
       const status = err?.response?.status;
 
-      if (status !== 401 && status !== 403) {
+      if (process.env.NODE_ENV !== "production") {
         console.error("getUser unexpected error:", err);
       }
 
@@ -46,7 +48,9 @@ export const UserProvider = ({ children }) => {
         window.location.href = "/";
       }
     } catch (err) {
-      console.error("Logout failed:", err);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Logout failed:", err);
+      }
     }
   };
 
