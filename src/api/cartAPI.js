@@ -11,10 +11,14 @@ export const addToCart = ({ productId, color, size }) => {
 };
 
 // Get total cart item count
-export const fetchCartCount = () => api.get("cart/countCart");
+export const fetchCartCount = () => {
+  return api.get("cart/countCart");
+};
 
 // Get cart items
-export const fetchCartItems = () => api.get("cart/");
+export const fetchCartItems = () => {
+  return api.get("cart/");
+};
 
 // Increase item quantity in cart
 export const increaseCartItem = (itemId) => {

@@ -1,9 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { fetchCartCount, fetchCartItems } from "../api/cartAPI";
+import { useUser } from "../context/UserContext";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const { user } = useUser();
   const [cartCount, setCartCount] = useState(0);
   const [cartItems, setCartItems] = useState([]);
 
@@ -30,9 +32,11 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    updateCartItems();
-    updateCartCount();
-  }, []);
+    if (user) {
+      updateCartCount();
+      updateCartItems();
+    }
+  }, [user]);
 
   return (
     <CartContext.Provider
