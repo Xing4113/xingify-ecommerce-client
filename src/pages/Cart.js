@@ -90,7 +90,13 @@ const Cart = () => {
                   <div className="item-info-container">
                     <div className="item-image-container">
                       <img
-                        src={item.product.imageUrl}
+                        src={
+                          item.product.images?.find(
+                            (img) =>
+                              img.color.toLowerCase() ===
+                              item.color.toLowerCase()
+                          )?.imageUrl
+                        }
                         alt={item.product.name}
                         className="item-img"
                       />
