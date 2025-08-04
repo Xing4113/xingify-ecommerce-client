@@ -75,7 +75,8 @@ const EmailSubscription = () => {
 
         <p className="disclaimer">
           No spam. Just the shoes you'll actually love. See our{" "}
-          <a href="#">Privacy Policy</a> and <a href="#">Terms</a>.
+          <a href="/payment/privacy-policy">Privacy Policy</a> and{" "}
+          <a href="/payment/terms-of-service">Terms</a>.
         </p>
       </div>
     </section>
