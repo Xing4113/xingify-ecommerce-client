@@ -18,6 +18,7 @@ import Layout from "./components/Layout/Layout";
 import PaymentLayout from "./components/Layout/PaymentLayout";
 import OrderHistory from "./pages/OrderHistory";
 import Profile from "./pages/Profile";
+import NotFoundPage from "./pages/NotFoundPage";
 
 import { CartProvider } from "./context/CartContext";
 import { UserProvider } from "./context/UserContext";
@@ -147,6 +148,15 @@ function App() {
                 element={
                   <Layout>
                     <OrderHistory />
+                  </Layout>
+                }
+              />
+
+              <Route
+                path="*"
+                element={
+                  <Layout>
+                    <NotFoundPage />
                   </Layout>
                 }
               />

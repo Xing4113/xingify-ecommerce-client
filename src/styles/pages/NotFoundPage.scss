@@ -1,0 +1,17 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  min-height: 50vh; // adjusts for header/footer if inside Layout
+  padding: 0.25rem;
+
+  p {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0.5rem 0;
+    font-weight: 500;
+  }
+}

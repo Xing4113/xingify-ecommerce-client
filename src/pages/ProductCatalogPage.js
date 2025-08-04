@@ -11,6 +11,7 @@ import FilterSortDropdown from "../components/ProductCatalog/FilterSortDropdown/
 import useIsMobileView from "../hook/useIsMobileView";
 import ProductModal from "../components/ProductCatalog/ProductModal/ProductModal";
 import { useModal } from "../context/ModalContext";
+import NotFoundPage from "./NotFoundPage";
 
 function ProductCatalog() {
   const { category } = useParams();
@@ -52,6 +53,8 @@ function ProductCatalog() {
   const [isDesktopFilterVisible, setIsDesktopFilterVisible] = useState(true);
   const [isMobileFilterVisible, setIsMobileFilterVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const validCategories = ["men", "women", "kids", "new-arrival"];
+  const isInvalidCategory = !validCategories.includes(category);
 
   // Reset filters when category changes
   useEffect(() => {
@@ -140,6 +143,8 @@ function ProductCatalog() {
   }, []);
 
   useEffect(() => {
+    if (isInvalidCategory) return;
+
     const fetchProducts = async () => {
       showModal("loading");
       try {
@@ -225,6 +230,10 @@ function ProductCatalog() {
       }
     }
   };
+
+  if (isInvalidCategory) {
+    return <NotFoundPage />;
+  }
 
   return (
     <>
