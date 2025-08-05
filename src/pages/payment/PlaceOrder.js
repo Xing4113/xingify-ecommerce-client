@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { prepareOrder } from "../../api/orderAPI";
-import { updateAddress } from "../../api/userAPI";
+import { searchAddress } from "../../api/externalAPI";
 import * as yup from "yup";
 import { useCart } from "../../context/CartContext";
 import { useUser } from "../../context/UserContext";
@@ -97,7 +97,7 @@ function PlaceOrder() {
       }
 
       try {
-        const data = await updateAddress(value.trim());
+        const data = await searchAddress(value.trim());
 
         if (data.found > 0 && data.results[0]?.POSTAL === value.trim()) {
           const result = data.results[0];
@@ -124,6 +124,7 @@ function PlaceOrder() {
             ...prev,
             postalCode: "Invalid postal code",
           }));
+          showValidation(true);
         }
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
