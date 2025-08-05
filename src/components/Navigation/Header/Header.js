@@ -82,11 +82,11 @@ function Header({ user, logout, onMenuToggle }) {
         </ul>
 
         <ul className="item-links">
-          <li className="search-icon-wrapper">
+          {/* <li className="search-icon-wrapper">
             <div className="nav-icon-wrapper">
               <SearchBar />
             </div>
-          </li>
+          </li> */}
           <li className="cart-icon-wrapper">
             <div className="nav-icon-wrapper">
               <Link to="/cart">
