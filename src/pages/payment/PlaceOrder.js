@@ -124,7 +124,7 @@ function PlaceOrder() {
             ...prev,
             postalCode: "Invalid postal code",
           }));
-          showValidation(true);
+          setShowValidation(true);
         }
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
