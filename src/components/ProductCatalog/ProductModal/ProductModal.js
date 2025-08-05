@@ -12,7 +12,7 @@ import { useCart } from "../../../context/CartContext";
 import { useModal } from "../../../context/ModalContext";
 
 const ProductModal = ({ product, onClose }) => {
-  const { showModal } = useModal();
+  const { showModal, hideModal } = useModal();
   const { updateCartCount } = useCart();
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -50,6 +50,8 @@ const ProductModal = ({ product, onClose }) => {
       } else {
         showModal("error", "Failed to add to cart. Please try again.");
       }
+    } finally {
+      hideModal();
     }
   };
 

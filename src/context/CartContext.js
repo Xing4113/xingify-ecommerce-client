@@ -23,7 +23,23 @@ export const CartProvider = ({ children }) => {
   const updateCartItems = async () => {
     try {
       const res = await fetchCartItems();
-      setCartItems(res.data.cart || []);
+      const rawCart = res.data.cart || [];
+
+      const enrichedCart = rawCart.map((item) => {
+        const matchedImage = item.product?.images?.find(
+          (img) => img.color.toLowerCase() === item.color.toLowerCase()
+        );
+
+        const productCopy = { ...item.product }; // prevent direct mutation
+        productCopy.imageUrl = matchedImage?.imageUrl || item.product.imageUrl;
+
+        return {
+          ...item,
+          product: productCopy, // use updated product object
+        };
+      });
+
+      setCartItems(enrichedCart);
     } catch (err) {
       if (process.env.NODE_ENV !== "production") {
         console.error("Failed to fetch cart items", err);

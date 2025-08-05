@@ -33,7 +33,7 @@ const placeOrderSchema = yup.object().shape({
 function PlaceOrder() {
   const isMobileView = useIsMobileView();
 
-  const { showModal } = useModal();
+  const { showModal, hideModal } = useModal();
   const { cartItems } = useCart();
   const { user } = useUser();
 
@@ -114,6 +114,7 @@ function PlaceOrder() {
             streetAddress: undefined,
             postalCode: undefined,
           }));
+          setShowValidation(false);
         } else {
           setFormData((prev) => ({
             ...prev,
@@ -215,6 +216,7 @@ function PlaceOrder() {
       showModal("error", "Unable to place order. Please try again.");
     } finally {
       setIsSubmitting(false);
+      hideModal();
     }
   };
 

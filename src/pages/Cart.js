@@ -16,7 +16,7 @@ import { useModal } from "../context/ModalContext";
 const Cart = () => {
   const navigate = useNavigate();
   const { cartItems, updateCartItems, updateCartCount } = useCart();
-  const { showModal } = useModal();
+  const { showModal, hideModal } = useModal();
 
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isSizeModalOpen, setIsSizeModalOpen] = useState(false);
@@ -33,12 +33,16 @@ const Cart = () => {
 
   const handleIncrease = async (itemId) => {
     try {
+      showModal("loading");
+
       await increaseCartItem(itemId);
       refreshCart();
     } catch (err) {
       if (process.env.NODE_ENV !== "production") {
         console.error("Failed to increase quantity", err);
       }
+    } finally {
+      hideModal();
     }
   };
 
@@ -50,6 +54,8 @@ const Cart = () => {
       if (process.env.NODE_ENV !== "production") {
         console.error("Failed to decrease quantity", err);
       }
+    } finally {
+      hideModal();
     }
   };
 
