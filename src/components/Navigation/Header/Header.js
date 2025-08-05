@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Header.scss";
 import SearchBar from "./SearchBar/SearchBar";
 import { NavLink, Link } from "react-router-dom";
@@ -13,6 +13,8 @@ function Header({ user, logout, onMenuToggle }) {
 
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +23,7 @@ function Header({ user, logout, onMenuToggle }) {
       if (currentScrollY > 80) {
         if (currentScrollY > lastScrollY) {
           setShowHeader(false); // Scrolling down
+          setShowDropdown(false);
         } else {
           setShowHeader(true); // Scrolling up
         }
@@ -34,6 +37,17 @@ function Header({ user, logout, onMenuToggle }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className={`header ${showHeader ? "show" : "hide"}`}>
@@ -86,26 +100,40 @@ function Header({ user, logout, onMenuToggle }) {
           <li className="user-icon-wrapper ">
             <div className="nav-icon-wrapper">
               {user ? (
-                <div className="user-dropdown-container ">
-                  <Link>
+                <div
+                  className={`user-dropdown-container ${
+                    showDropdown ? "dropdown-active" : ""
+                  }`}
+                  ref={dropdownRef}
+                >
+                  <button
+                    className="user-toggle-btn"
+                    onClick={() => setShowDropdown((prev) => !prev)}
+                  >
                     <FaRegUser className="item-icon" />
-                  </Link>
-                  <div className="user-dropdown">
-                    <p className="user-name">
-                      <FaRegUser className="user-name-icon" />
-                      <span className="user-name-text">{user.name}</span>
-                    </p>
-
-                    <Link to="/profile">Profile</Link>
-                    <Link to="/orders">View Orders</Link>
-                    <button className="logout-btn" onClick={logout}>
-                      Logout
-                    </button>
-                  </div>
+                  </button>
+                  {showDropdown && (
+                    <div
+                      className={`user-dropdown ${
+                        showDropdown ? "visible" : ""
+                      }`}
+                    >
+                      <p className="user-name">
+                        <FaRegUser className="user-name-icon" />
+                        <span className="user-name-text">{user.name}</span>
+                      </p>
+                      <Link to="/profile">Profile</Link>
+                      <Link to="/orders">View Orders</Link>
+                      <button className="logout-btn" onClick={logout}>
+                        Logout
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : (
-                <Link to="/login">
+                <Link to="/login" className="login-link">
                   <FaRegUser className="item-icon" />
+                  <span className="login-text">Log In</span>
                 </Link>
               )}
             </div>
