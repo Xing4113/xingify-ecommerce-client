@@ -12,7 +12,8 @@ const PasswordLoginForm = ({ email, onSwitchMethod }) => {
       const res = await loginWithPassword(email, password);
 
       if (res.data.user_id) {
-        window.location.href = "/";
+        setErrMsg(JSON.stringify(res));
+        // window.location.href = "/";
       } else {
         setErrMsg(res.data?.message || "Login failed.");
       }
