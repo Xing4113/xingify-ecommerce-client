@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background: rgba(0, 0, 0, 0.4);
   z-index: 15;
 
@@ -22,7 +22,7 @@
   top: 0;
   right: 0;
   width: 60vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: #fff;
   z-index: 1000;
   padding: 1rem;
@@ -87,7 +87,7 @@
 
 .mobile-menu-user {
   border-top: 1px solid #ddd;
-  padding: 10px 16px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
   background-color: #fff;
 
   .user-info {
