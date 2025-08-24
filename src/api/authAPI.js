@@ -24,5 +24,9 @@ export const login = (email) => {
 };
 
 export const loginWithPassword = (email, password) => {
-  return api.post("/auth/passwordLogin", { email, password });
+  return api.post(
+    "/auth/passwordLogin",
+    { email, password },
+    { withCredentials: true }
+  );
 };
