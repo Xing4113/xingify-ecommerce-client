@@ -3,9 +3,11 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { getStripeSession, confirmOrder } from "../../api/orderAPI";
 import "../../styles/pages/payment/PaymentSuccess.scss";
 import { useModal } from "../../context/ModalContext";
+import { useCart } from "../../context/CartContext";
 
 const PaymentSuccess = () => {
   const { showModal, hideModal } = useModal();
+  const { updateCartCount } = useCart();
   const [searchParams] = useSearchParams();
   const [orderNo, setOrderNo] = useState("");
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ const PaymentSuccess = () => {
           order_no: metadata.order_no,
         });
 
+        updateCartCount();
         // Optionally redirect or show success
       } catch (err) {
         if (process.env.NODE_ENV !== "production") {
