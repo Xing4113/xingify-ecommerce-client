@@ -50,8 +50,6 @@ const ProductModal = ({ product, onClose }) => {
       } else {
         showModal("error", "Failed to add to cart. Please try again.");
       }
-    } finally {
-      hideModal();
     }
   };
 
