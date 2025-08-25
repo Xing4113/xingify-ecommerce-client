@@ -42,8 +42,6 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await logoutUser();
 
-      console.log("res =", res);
-
       if (res.status === 200) {
         setUser(null);
         window.location.href = "/";
