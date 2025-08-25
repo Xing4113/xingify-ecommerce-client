@@ -45,6 +45,7 @@ export const UserProvider = ({ children }) => {
       console.log("res =", res);
 
       if (res.status === 200) {
+        setUser(null);
         window.location.href = "/";
       }
     } catch (err) {
