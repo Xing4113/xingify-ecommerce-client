@@ -43,7 +43,9 @@ function OrderHistory() {
         if (res.data.success) {
           setOrders((prev) =>
             prev.map((o) =>
-              o.order_id === order_id ? { ...o, status: "cancelled" } : o
+              o.order_id === order_id
+                ? { ...o, status: "cancelled", cancel_dt: new Date() }
+                : o
             )
           );
 
