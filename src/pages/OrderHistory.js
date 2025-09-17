@@ -70,7 +70,7 @@ function OrderHistory() {
         setOrders((prev) =>
           prev.map((o) =>
             o.order_id === order_id
-              ? { ...o, status: "completed", complete_dt: new Date() }
+              ? { ...o, status: "completed", arrives_date: new Date() }
               : o
           )
         );
